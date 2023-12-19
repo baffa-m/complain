@@ -12,8 +12,10 @@ class Complaints extends Model
 
     protected $fillable = [
         'complainant',
-        'complain',
+        'title',
+        'description',
         'status',
+        'resolved_by',
         'user_id'
     ];
 }

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
             $table->string('complainant');
-            $table->string('complain');
+            $table->string('title');
+            $table->string('description');
             $table->string('status');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->string('resolved_by');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
