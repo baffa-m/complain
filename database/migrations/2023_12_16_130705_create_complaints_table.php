@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('complainant');
             $table->string('title');
             $table->string('description');
-            $table->string('status');
-            $table->string('resolved_by');
+            $table->string('status')->nullable();
+            $table->string('resolved_by')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });

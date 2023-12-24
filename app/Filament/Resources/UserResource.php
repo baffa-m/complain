@@ -33,6 +33,9 @@ class UserResource extends Resource
                 Forms\Components\Select::make('role')
                     ->required()
                     ->options(User::ROLES),
+                    Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required(),
                 ]);
     }
 

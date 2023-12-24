@@ -24,8 +24,14 @@ class ComplaintsController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $complaints = Complaints::where('user_id', '==', $user_id)->get();
-        return view('complaints.complaints', compact('complaints'));
+        $complaints = Complaints::where('user_id', $user_id)->get();
+        $all_complaints = Complaints::get();
+
+        if (auth()->user()->role == 'STUDENT') {
+            return view('complaints.complaints', compact('complaints'));
+        } else {
+            return view('complaints.complaints', compact('all_complaints'));
+        }
     }
 
     /**
@@ -41,7 +47,14 @@ class ComplaintsController extends Controller
      */
     public function store(ComplaintRequest $request)
     {
-        $complaint = Complaints::create($request->validated());
+        $complaint = Complaints::create([
+            'complainant' => auth()->user()->name,
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('complaints.index')->with('success', 'Complaint Submitted Successfully');
 
     }
 
@@ -56,17 +69,25 @@ class ComplaintsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Complaints $complaints)
-    {
-        //
-    }
+    public function edit(Complaints $complaint)
+{
+    return view('complaints.edit', compact('complaint'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Complaints $complaints)
+    public function update(ComplaintRequest $request, Complaints $complaint)
     {
-        //
+        $complaint->update([
+            'complainant' => auth()->user()->name,
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'user_id' => auth()->user()->id,
+        ]);
+
+        // Redirect to the complaints index or show page
+        return redirect()->route('complaints.index')->with('success', 'Complaint Updated Successfully');
     }
 
     /**

@@ -31,8 +31,6 @@
             <main class="container mx-auto px-5 flex-grow transition-transform ease-in-out duration-300 transform">
                 {{ $slot }}
             </main>
-
-            @include('layouts.partials.footer')
         </div>
 
         @stack('modals')

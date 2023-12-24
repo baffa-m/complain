@@ -6,6 +6,6 @@
             Welcome UDUSOK Student Complaint System </span>
         </h1>
         <a class="px-3 py-2 text-lg text-white bg-gray-800 rounded mt-5 inline-block"
-            href="http://127.0.0.1:8000/blog">Get Started</a>
+            href="{{ route('complaints.index')}}">Get Started</a>
     </div>
 </x-guest-layout>
