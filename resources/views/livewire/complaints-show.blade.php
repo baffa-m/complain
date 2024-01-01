@@ -1,4 +1,5 @@
-<x-app-layout>
+<div>
+    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 
     <div class="w-2/4 mx-auto pt-10">
         <div class="bg-white p-6 rounded-lg shadow-md">
@@ -30,36 +31,20 @@
 
         <!-- New message input -->
         <div class="new-message mt-6">
-            <form id="messageForm" action="{{ route('complaints.chat.store', $complaint) }}" method="post">
+            <form wire:submit="{{ route('complaints.chat.store', $complaint) }}" method="post">
                 @csrf
-                <input wire:model="content" name="content" type="text"
+                <input name="content" type="text"
                     class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-sm text-gray-700 border-gray-200 placeholder:text-gray-400"
                     cols="30" rows="3" placeholder="Type your message" />
                 @error('content')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
-                <div class="">
-                    <button type="submit"
+                <button wire:
                     class="mt-3 inline-flex items-center justify-center h-10 px-4 font-medium tracking-wide text-white transition duration-200 bg-gray-900 rounded-lg hover:bg-gray-800 focus:shadow-outline focus:outline-none">
                     Send
-                    </button>
-                    @if (auth()->user()->role != 'STUDENT')
-                    <a href="{{ route('completed', ['complaint' => $complaint])}}"
-                        class="mt-3 inline-flex items-center justify-center h-10 px-4 font-medium tracking-wide text-white transition duration-200 bg-gray-900 rounded-lg hover:bg-gray-800 focus:shadow-outline focus:outline-none">
-                        Mark as Completed
-                    </a>
-                    @endif
-                </div>
+                </button>
             </form>
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Scroll to the bottom of the chat-messages div
-            var chatMessagesDiv = document.querySelector('.chat-messages');
-            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
-        });
-    </script>
-
-</x-app-layout>
+</div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ComplaintRequest;
-use App\Models\Complaints;
+use App\Models\Complaint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ComplaintRequest;
 
 class ComplaintsController extends Controller
 {
@@ -14,18 +15,18 @@ class ComplaintsController extends Controller
 
      public function home()
      {
-         $user_id = auth()->user()->id;
-         $unresolved_complaints = Complaints::where('user_id', '==', $user_id)->where('status', '==', null)->count();
-         $resolved_complaints = Complaints::where('user_id', '==', $user_id)->where('status', '!=', null)->count();
-         $total_complaints = Complaints::where('user_id', '==', $user_id)->count();
+        $user_id = auth()->user()->id;
+        $unresolved_complaints = Complaint::where('user_id', $user_id)->where('status', null)->count();
+        $resolved_complaints = Complaint::where('user_id', $user_id)->where('status', '!=', null)->count();
+        $total_complaints = Complaint::where('user_id', $user_id)->count();
          return view('complaints.home', compact('unresolved_complaints', 'resolved_complaints', 'total_complaints'));
      }
 
     public function index()
     {
         $user_id = auth()->user()->id;
-        $complaints = Complaints::where('user_id', $user_id)->get();
-        $all_complaints = Complaints::get();
+        $complaints = Complaint::where('user_id', $user_id)->get();
+        $all_complaints = Complaint::get();
 
         if (auth()->user()->role == 'STUDENT') {
             return view('complaints.complaints', compact('complaints'));
@@ -47,11 +48,12 @@ class ComplaintsController extends Controller
      */
     public function store(ComplaintRequest $request)
     {
-        $complaint = Complaints::create([
+        $complaint = Complaint::create([
             'complainant' => auth()->user()->name,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'user_id' => auth()->user()->id,
+            'status' => 'active'
         ]);
 
         return redirect()->route('complaints.index')->with('success', 'Complaint Submitted Successfully');
@@ -61,15 +63,17 @@ class ComplaintsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Complaints $complaints)
+    public function show(Complaint $complaint)
     {
-        //
+        $messages = $complaint->messages()->with('user')->orderBy('created_at')->get();
+
+        return view('complaints.show', compact('complaint', 'messages'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Complaints $complaint)
+    public function edit(Complaint $complaint)
 {
     return view('complaints.edit', compact('complaint'));
 }
@@ -77,7 +81,7 @@ class ComplaintsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ComplaintRequest $request, Complaints $complaint)
+    public function update(ComplaintRequest $request, Complaint $complaint)
     {
         $complaint->update([
             'complainant' => auth()->user()->name,
@@ -93,8 +97,20 @@ class ComplaintsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Complaints $complaints)
+    public function destroy(Complaint $complaints)
     {
         //
+    }
+
+    public function markCompleted(Complaint $complaint)
+    {
+        $complaint->update([
+            'status' => 'completed',
+            'resolved_by' => Auth::user()->name,
+        ]);
+
+        // You can add a flash message or any additional logic here
+
+        return redirect()->route('complaints.index');
     }
 }

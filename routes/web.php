@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Message;
+use App\Models\Complaints;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ComplaintsController;
-use App\Models\Complaints;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/home', [ComplaintsController::class, 'home'])->name('home');
-
+    Route::get('{complaint}/chat', [MessageController::class, 'show'])->name('complaints.chat');
+    Route::post('{complaint}/chat', [MessageController::class, 'store'])->name('complaints.chat.store');
+    Route::get('complaints/{complaint}/completed', [ComplaintsController::class, 'markCompleted'])->name('completed');
     Route::resource('complaints', ComplaintsController::class);
     Route::get('user/staff', [UsersController::class, 'createStaff'])->name('user.staff');
     Route::post('user/staff', [UsersController::class, 'postStaff'])->name('add.staff');
