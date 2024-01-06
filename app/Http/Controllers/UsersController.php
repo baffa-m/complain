@@ -14,14 +14,12 @@ class UsersController extends Controller
     }
 
     public function postStaff(Request $request) {
-
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email',
             'user_id' => 'required|string',
             'password' => 'required|string|confirmed'
         ]);
-
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -29,6 +27,8 @@ class UsersController extends Controller
             'password' => Hash::make($request->input('password')),
             'role' => 'STAFF',
         ]);
+
+        return redirect()->route('home')->with('success', 'Staff registered successfully');
     }
 
     public function createStudent() {
@@ -51,5 +51,8 @@ class UsersController extends Controller
             'password' => Hash::make($request->input('password')),
             'role' => 'STUDENT',
         ]);
+
+        return redirect()->route('home')->with('success', 'Staff registered successfully');
+
     }
 }

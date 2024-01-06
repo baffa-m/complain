@@ -17,7 +17,7 @@
                     wire:model.live='status'
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option value="">All</option>
-                    <option value="active">Active</option>
+                    <option value="active">Unresolved</option>
                     <option value="completed">Resolved</option>
                 </select>
             </div>
@@ -55,7 +55,7 @@
                         <td class="px-6 py-4">
                             {{ $complaint->created_at }}
                         </td>
-                        @if ($complaint->status = 'completed')
+                        @if ($complaint->status == 'completed')
                         <td class="px-6 py-4">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Completed
@@ -128,7 +128,6 @@
                             @if($complaint->resolved_by)
                                 <p>{{ $complaint->resolved_by }}</p>
                             @else
-                            <a href="{{ route('complaints.edit', ['complaint' => $complaint ])}}" wire:navigate class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Attend</a>
                             @endif
                         </td>
                     </tr>

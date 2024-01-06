@@ -35,6 +35,6 @@ Route::middleware([
     Route::get('user/staff', [UsersController::class, 'createStaff'])->name('user.staff');
     Route::post('user/staff', [UsersController::class, 'postStaff'])->name('add.staff');
     Route::get('user/student', [UsersController::class, 'createStudent'])->name('user.student');
-    Route::post('user/staff', [UsersController::class, 'postStudent'])->name('add.student');
+    Route::post('user/student', [UsersController::class, 'postStudent'])->name('add.student');
 
 });
