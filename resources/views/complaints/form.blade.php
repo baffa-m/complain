@@ -17,7 +17,12 @@
 
     <div id="courseCode">
         <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Course Code</h2>
-        <input type="text" name="course" value="{{ old('course', $complaint->course ?? '') }}" placeholder="Course Title" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+        <select name="course" id="course" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+            <option value="CMP101">CMP101</option>
+            <option value="CMP202">CMP202</option>
+            <option value="CMP303">CMP303</option>
+            <option value="CMP404">CMP404</option>
+        </select>
         @error('course')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
