@@ -14,24 +14,12 @@
 
                 <li>
                     <a class="flex space-x-2 items-center hover:text-white text-lg text-gray-500"
-                        href="http://127.0.0.1:8000/blog">
+                        href="{{ route('complaints.index')}}">
                         Complaints
                     </a>
                 </li>
 
-                <li>
-                    <a class="flex space-x-2 items-center hover:text-white text-lg text-gray-500"
-                        href="http://127.0.0.1:8000/blog">
-                        About Us
-                    </a>
-                </li>
-
-                <li>
-                    <a class="flex space-x-2 items-center hover:text-white text-lg text-gray-500"
-                        href="http://127.0.0.1:8000/blog">
-                        Contact Us
-                    </a>
-                </li>
+                
 
             </ul>
         </div>
