@@ -8,6 +8,7 @@ use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use App\Actions\Jetstream\DeleteUser;
+use App\Http\Responses\LoginResponse;
 use Illuminate\Support\ServiceProvider;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -37,6 +38,11 @@ class JetstreamServiceProvider extends ServiceProvider
                 return $user;
             }
         });
+
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\LoginResponse::class,
+            \App\Http\Responses\LoginResponse::class,
+        );
     }
 
     /**

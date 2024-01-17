@@ -28,7 +28,7 @@ class UsersController extends Controller
             'role' => 'STAFF',
         ]);
 
-        return redirect()->route('home')->with('success', 'Staff registered successfully');
+        return redirect()->route('complaints.index')->with('success', 'Staff registered successfully');
     }
 
     public function createStudent() {
@@ -52,7 +52,7 @@ class UsersController extends Controller
             'role' => 'STUDENT',
         ]);
 
-        return redirect()->route('home')->with('success', 'Staff registered successfully');
+        return redirect()->route('complaints.index')->with('success', 'Staff registered successfully');
 
     }
 }
