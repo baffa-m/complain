@@ -53,6 +53,7 @@ class ComplaintsController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'user_id' => auth()->user()->id,
+            'course' => $request->input('course'),
             'status' => 'active'
         ]);
 

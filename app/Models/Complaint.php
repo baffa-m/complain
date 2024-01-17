@@ -16,7 +16,8 @@ class Complaint extends Model
         'description',
         'status',
         'resolved_by',
-        'user_id'
+        'user_id',
+        'course'
     ];
 
     public function messages()

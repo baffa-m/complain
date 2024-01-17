@@ -3,22 +3,22 @@
 </h1>
 <div class="mt-8 flex justify-between flex-col">
     <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Nature Of Complaint</h2>
-    <select name="title" id="complaintTitle" class="w-full mb-4 rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
-        <option value="Missing Grade">Missing Grade</option>
-        <option value="Missing CA">Missing CA</option>
-        <option value="Remarking">Remarking</option>
-        <option value="Others">Others</option>
+    <select name="drop_title" id="complaintTitle" class="w-full mb-4 rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+        <option value="Missing Grade" {{ old('title') == 'Missing Grade' ? 'selected' : '' }}>Missing Grade</option>
+        <option value="Missing CA" {{ old('title') == 'Missing CA' ? 'selected' : '' }}>Missing CA</option>
+        <option value="Remarking" {{ old('title') == 'Remarking' ? 'selected' : '' }}>Remarking</option>
+        <option value="Others" {{ old('title') == 'Others' ? 'selected' : '' }}>Others</option>
     </select>
 
-    <div id="title">
+    <div id="titleDiv">
         <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Complaint Title</h2>
-        <input type="text" name="title" value="{{ old('title', $complaint->title ?? '') }}" placeholder="Complaint Title" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+        <input type="text" name="title" id="title" value="{{ old('title', $complaint->title ?? '') }}" placeholder="Complaint Title" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
     </div>
 
-    <div id="courseTitle">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Course Title</h2>
-        <input type="text" name="course_title" value="{{ old('course_title', $complaint->course_title ?? '') }}" placeholder="Course Title" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
-        @error('title')
+    <div id="courseCode">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Course Code</h2>
+        <input type="text" name="course" value="{{ old('course', $complaint->course ?? '') }}" placeholder="Course Title" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+        @error('course')
             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
     </div>
@@ -41,35 +41,35 @@
 </div>
 
 @push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 <script>
-$(document).ready(function() {
-    // Initial check on page load
-    toggleTitleAndCourseInput();
-
-    // Event listener for changes in the select dropdown
-    $('#complaintTitle').on('change', function() {
+    $(document).ready(function() {
+        // Initial check on page load
         toggleTitleAndCourseInput();
-    });
 
-    // Function to toggle the visibility of the title and course inputs based on the selected option
-    function toggleTitleAndCourseInput() {
-        var selectedOption = $('#complaintTitle').val();
-        var titleInput = $('#title');
-        var courseTitleInput = $('#courseTitle');
-        var descriptionBox = $('#descriptionBox')
+        // Event listener for changes in the select dropdown
+        $('#complaintTitle').on('change', function() {
+            toggleTitleAndCourseInput();
+        });
 
-        if (selectedOption === 'Others') {
-            titleInput.show();
-            courseTitleInput.hide();
-            descriptionBox.show();
-        } else {
-            titleInput.hide();
-            courseTitleInput.show();
-            descriptionBox.hide();
+        // Function to toggle the visibility of the title and course inputs based on the selected option
+        function toggleTitleAndCourseInput() {
+            var selectedOption = $('#complaintTitle').val();
+            var titleInput = $('#titleDiv');
+            var title = $('#title')
+            var courseTitleInput = $('#courseTitle');
+            var descriptionBox = $('#descriptionBox');
+
+            if (selectedOption === 'Others') {
+                titleInput.show();
+                courseTitleInput.hide();
+                descriptionBox.show();
+            } else {
+                title.val = selectedOption;
+                titleInput.hide();
+                courseTitleInput.show();
+                descriptionBox.hide();
+            }
         }
-    }
-});
+    });
 </script>
 @endpush

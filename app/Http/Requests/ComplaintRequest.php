@@ -23,9 +23,19 @@ class ComplaintRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+        $rules = [
+            'drop_title' => 'sometimes|required|string|max:255',
+            'title' => 'required_without:drop_title|string|max:255',
+            'description' => 'nullable|string',
+            'course' => 'string',
         ];
+
+        // If drop_title is present, set its value as the value of title
+        if (request()->has('drop_title')) {
+            $rules['title'] = 'required|string|max:255'; // Make title required
+            request()->merge(['title' => request()->input('drop_title')]); // Set title value
+        }
+
+        return $rules;
     }
 }
