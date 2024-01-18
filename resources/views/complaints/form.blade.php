@@ -19,8 +19,22 @@
         <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Course Code</h2>
         <select name="course" id="course" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
             <option value="CMP101">CMP101</option>
+            <option value="CMP102">CMP102</option>
+            <option value="CMP104">CMP105</option>
+            <option value="CMP105">CMP106</option>
+            <option value="CMP106">CMP108</option>
+            <option value="CMP108">CMP121</option>
+            <option value="CMP201">CMP201</option>
             <option value="CMP202">CMP202</option>
+            <option value="CMP203">CMP203</option>
+            <option value="CMP206">CMP206</option>
+            <option value="CMP212">CMP212</option>
+            <option value="CMP254">CMP254</option>
+            <option value="CMP301">CMP301</option>
+            <option value="CMP302">CMP302</option>
             <option value="CMP303">CMP303</option>
+            <option value="CMP304">CMP304</option>
+            <option value="CMP305">CMP305</option>
             <option value="CMP404">CMP404</option>
         </select>
         @error('course')
