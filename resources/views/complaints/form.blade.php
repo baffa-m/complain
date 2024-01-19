@@ -18,6 +18,7 @@
     <div id="courseCode">
         <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Course Code</h2>
         <select name="course" id="course" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+            <option value="">Select a course</option>
             <option value="CMP101">CMP101</option>
             <option value="CMP102">CMP102</option>
             <option value="CMP104">CMP105</option>
@@ -62,33 +63,57 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        // Initial check on page load
+    // Event listener for form submission
+    $('form').on('submit', function() {
+        // Toggle visibility before submitting the form
         toggleTitleAndCourseInput();
 
-        // Event listener for changes in the select dropdown
-        $('#complaintTitle').on('change', function() {
-            toggleTitleAndCourseInput();
-        });
+        var selectedOption = $('#complaintTitle').val();
+        var titleInputValue;
 
-        // Function to toggle the visibility of the title and course inputs based on the selected option
-        function toggleTitleAndCourseInput() {
-            var selectedOption = $('#complaintTitle').val();
-            var titleInput = $('#titleDiv');
-            var title = $('#title')
-            var courseTitleInput = $('#courseTitle');
-            var descriptionBox = $('#descriptionBox');
-
-            if (selectedOption === 'Others') {
-                titleInput.show();
-                courseTitleInput.hide();
-                descriptionBox.show();
-            } else {
-                title.val = selectedOption;
-                titleInput.hide();
-                courseTitleInput.show();
-                descriptionBox.hide();
-            }
+        if (selectedOption === 'Others') {
+            // Set the title input value as the selected value for submission
+            titleInputValue = $('#title').val();
+        } else {
+            // Set the title input value as the selected option for submission
+            titleInputValue = selectedOption;
         }
+
+        // Set the title input value for submission
+        $('#complaintTitle').val(titleInputValue);
+
+        // The form will be submitted with the updated complaintTitle value
     });
+
+    // Initial check on page load
+    toggleTitleAndCourseInput();
+
+    // Event listener for changes in the select dropdown
+    $('#complaintTitle').on('change', function() {
+        // Toggle visibility when the dropdown changes
+        toggleTitleAndCourseInput();
+    });
+
+    // Function to toggle the visibility of the title and course inputs based on the selected option
+    function toggleTitleAndCourseInput() {
+        var selectedOption = $('#complaintTitle').val();
+        var titleInput = $('#titleDiv');
+        var title = $('#title');
+        var courseTitleInput = $('#courseCode');
+        var descriptionBox = $('#descriptionBox');
+
+        if (selectedOption === 'Others') {
+            titleInput.show();
+            courseTitleInput.hide();
+            descriptionBox.show();
+        } else {
+            title.val(selectedOption);
+            titleInput.hide();
+            courseTitleInput.show();
+            descriptionBox.hide();
+        }
+    }
+});
+
 </script>
 @endpush

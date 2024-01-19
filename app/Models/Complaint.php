@@ -29,4 +29,8 @@ class Complaint extends Model
         $query->where('title', 'like', "%{$value}%");
     }
 
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

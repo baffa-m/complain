@@ -1,9 +1,10 @@
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-
+    @dd($complaint)
     <div class="w-2/4 mx-auto pt-10">
         <div class="bg-white p-6 rounded-lg shadow-md">
             <h3>{{ $complaint->title }}</h3>
+            <h4>{{ $complaint->course }} </h4>
             <p>{{ $complaint->description }}</p>
         </div>
 

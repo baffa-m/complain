@@ -87,7 +87,10 @@
                 <thead class="text-xs text-gray-700 uppercase bg-green-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Title
+                            Complaint
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Student
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Date Posted
@@ -108,6 +111,11 @@
                                 <div class="text-base font-semibold dark:text-blue-500 hover:underline"><a href="{{ route('complaints.show', ['complaint' => $complaint] )}}" wire:navigate>{{ $complaint->title }}</a></div>
                             </div>
                         </th>
+                        <td class="text-gray-900 whitespace-nowrap dark:text-white">
+                            <div class="ps-3">
+                                <div class="text-base font-semibold dark:text-blue-500 hover:underline"><a href="{{ route('complaints.show', ['complaint' => $complaint] )}}" wire:navigate>{{ $complaint->user->name }}</a></div>
+                            </div>
+                        </td>
                         <td class="px-6 py-4">
                             {{ $complaint->created_at }}
                         </td>

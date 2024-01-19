@@ -15,10 +15,9 @@ class ComplaintsController extends Controller
 
      public function home()
      {
-        $user_id = auth()->user()->id;
-        $unresolved_complaints = Complaint::where('user_id', $user_id)->where('status', null)->count();
-        $resolved_complaints = Complaint::where('user_id', $user_id)->where('status', '!=', null)->count();
-        $total_complaints = Complaint::where('user_id', $user_id)->count();
+        $unresolved_complaints = Complaint::where('status', 'active')->count();
+        $resolved_complaints = Complaint::where('status', 'completed')->count();
+        $total_complaints = Complaint::all()->count();
          return view('complaints.home', compact('unresolved_complaints', 'resolved_complaints', 'total_complaints'));
      }
 
