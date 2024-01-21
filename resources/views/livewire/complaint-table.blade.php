@@ -37,9 +37,6 @@
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Attended by
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             Action
                         </th>
                     </tr>
@@ -69,9 +66,6 @@
                         </td>
                         @endif
                         <td class="px-6 py-4">
-                            {{ $complaint->resolved_by }}
-                        </td>
-                        <td class="px-6 py-4">
                             <a href="{{ route('complaints.edit', ['complaint' => $complaint ])}}" wire:navigate class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
                     </tr>
@@ -97,9 +91,6 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Resolved by
                         </th>
                     </tr>
                 </thead>
@@ -132,12 +123,6 @@
                             </div>
                         </td>
                         @endif
-                        <td class="px-6 py-4">
-                            @if($complaint->resolved_by)
-                                <p>{{ $complaint->resolved_by }}</p>
-                            @else
-                            @endif
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
