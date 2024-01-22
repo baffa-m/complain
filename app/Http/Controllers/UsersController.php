@@ -17,12 +17,14 @@ class UsersController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email',
-            'user_id' => 'required|string',
+            'phone_no' => 'required|numeric',
+            'user_id' => 'required|numeric',
             'password' => 'required|string|confirmed'
         ]);
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'phone_no' => $request->input('phone_no'),
             'user_id' => $request->input('user_id'),
             'password' => Hash::make($request->input('password')),
             'role' => 'STAFF',
@@ -40,13 +42,15 @@ class UsersController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email',
-            'user_id' => 'required|string',
+            'phone_no' => 'required|numeric',
+            'user_id' => 'required|numeric',
             'password' => 'required|string|confirmed'
         ]);
 
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'phone_no' => $request->input('phone_no'),
             'user_id' => $request->input('user_id'),
             'password' => Hash::make($request->input('password')),
             'role' => 'STUDENT',
