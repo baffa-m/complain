@@ -26,14 +26,18 @@ class ComplaintRequest extends FormRequest
         $rules = [
             'drop_title' => 'sometimes|required|string|max:255',
             'title' => 'required_without:drop_title|string|max:255',
+            'session' => 'string|nullable',
             'description' => 'nullable|string',
             'course' => 'nullable|string',
         ];
 
         // If drop_title is present and it is not 'Others', set its value as the value of title
-        if (request()->has('drop_title') && request()->input('drop_title') !== 'Others') {
-            $rules['title'] = 'required|string|max:255'; // Make title required
-            request()->merge(['title' => request()->input('drop_title')]); // Set title value
+        if ($this->filled('drop_title') && $this->input('drop_title') !== 'Others') {
+            // Reset the title validation rule to be required
+            $rules['title'] = 'required|string|max:255';
+
+            // Set the title value based on drop_title
+            $this->merge(['title' => $this->input('drop_title')]);
         }
 
         return $rules;

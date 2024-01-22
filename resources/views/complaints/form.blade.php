@@ -11,9 +11,25 @@
     </select>
 
     <div id="titleDiv">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Complaint Title</h2>
+        <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Please Specify</h2>
         <input type="text" name="title" id="title" value="{{ old('title', $complaint->title ?? '') }}" placeholder="Complaint Title" class="w-full rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
     </div>
+
+    <h2 class="text-xl font-semibold text-gray-900 mb-1 i">Session</h2>
+    <select name="session" class="w-full mb-2 rounded-lg p-2 bg-gray-50 focus:outline-none text-lg text-gray-700 border-gray-200 placeholder:text-gray-400">
+        <option value="">Select Session</option>
+        <option value="2013/2014">2013/2014</option>
+        <option value="2014/2015">2014/2015</option>
+        <option value="2015/2016">2015/2016</option>
+        <option value="2016/2017">2016/2017</option>
+        <option value="2017/2018">2017/2018</option>
+        <option value="2018/2019">2018/2019</option>
+        <option value="2019/2020">2019/2020</option>
+        <option value="2020/2021">2020/2021</option>
+        <option value="2021/2022">2021/2022</option>
+        <option value="2022/2023">2022/2023</option>
+        <option value="2023/2024">2023/2024</option>
+    </select>
 
     <div id="courseCode">
         <h2 class="text-2xl font-semibold text-gray-900 mb-2 i">Course Code</h2>
@@ -61,6 +77,7 @@
 </div>
 
 @push('scripts')
+
 <script>
     $(document).ready(function() {
     // Event listener for form submission
@@ -107,7 +124,6 @@
             courseTitleInput.hide();
             descriptionBox.show();
         } else {
-            title.val(selectedOption);
             titleInput.hide();
             courseTitleInput.show();
             descriptionBox.hide();
@@ -116,4 +132,5 @@
 });
 
 </script>
+
 @endpush

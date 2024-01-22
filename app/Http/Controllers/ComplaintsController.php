@@ -50,6 +50,7 @@ class ComplaintsController extends Controller
         $complaint = Complaint::create([
             'complainant' => auth()->user()->name,
             'title' => $request->input('title'),
+            'session' => $request->input('session'),
             'description' => $request->input('description'),
             'user_id' => auth()->user()->id,
             'course' => $request->input('course'),

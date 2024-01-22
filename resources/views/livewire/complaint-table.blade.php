@@ -34,10 +34,10 @@
                             Date Posted
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Status
+                            Session
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Status
                         </th>
                     </tr>
                 </thead>
@@ -61,13 +61,15 @@
                         @else
                         <td class="px-6 py-4">
                             <div class="flex items-center">
+                                {{ $complaint->session }}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full bg-blue-500 me-2"></div>Pending
                             </div>
                         </td>
                         @endif
-                        <td class="px-6 py-4">
-                            <a href="{{ route('complaints.edit', ['complaint' => $complaint ])}}" wire:navigate class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
