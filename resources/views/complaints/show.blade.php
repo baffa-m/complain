@@ -4,6 +4,8 @@
         <div class="bg-white p-6 rounded-lg shadow-md">
             <h3>{{ $complaint->title }}</h3>
             <h5 class="text-sm font-bold">For: {{ $complaint->course }}</h4>
+                <h5 class="text-sm font-bold">Session: {{ $complaint->session }}</h4>
+                <h5 class="text-sm font-bold">Complainant: {{ $complaint->complainant }}</h4>
             <p>{{ $complaint->description }}</p>
         </div>
 
