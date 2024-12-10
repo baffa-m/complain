@@ -17,13 +17,13 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-green-100">
+    <body class="font-sans antialiased bg-green-100" style="background-image: url({{ asset('image/bg-cover.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
         <x-banner />
 
         @include('layouts.partials.header')
 
 
-        <main class="container mx-auto px-5 flex flex-grow">
+        <main class="container mx-auto px-5 flex flex-grow text-black">
             {{ $slot}}
         </main>
 

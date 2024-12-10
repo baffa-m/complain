@@ -121,7 +121,6 @@
 
         if (selectedOption === 'Others') {
             titleInput.show();
-            courseTitleInput.hide();
             descriptionBox.show();
         } else {
             titleInput.hide();
